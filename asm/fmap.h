@@ -1,8 +1,8 @@
 #ifndef FMAP_H
 #define FMAP_H
-#include <string>
-#include <map>
 #include "asm_types.h"
+#include <map>
+#include <string>
 
 using namespace std;
 

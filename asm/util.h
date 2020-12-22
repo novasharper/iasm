@@ -5,5 +5,5 @@
 using namespace std;
 
 extern ushort parseInt(string number, bool isreg);
-//extern void runC(string cmd, byte arg0, ushort arg1);
+// extern void runC(string cmd, byte arg0, ushort arg1);
 #endif
