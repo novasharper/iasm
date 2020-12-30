@@ -9,14 +9,14 @@
 
 // TODO: Convert all params to void*
 
-#include "registers.h"
-//#include "memory.h"
-#include "asm_types.h"
-#include "op.h"
+#include "registers.hpp"
+//#include "memory.hpp"
+#include "asm_types.hpp"
+#include "op.hpp"
 
 // add, addc, addiw
 // void add(byte a1, byte a2, bool immediate, bool carry) {
-void add(object ar, ...) {
+void op_add(object ar, ...) {
   va_list args;
   va_start(args, ar);
   byte a1 = *(byte *)ar;
@@ -46,7 +46,7 @@ void add(object ar, ...) {
 
 // sub, subi, sbc, sbci, sbicw
 // void sub(byte a1, byte a2, bool immediate, bool carry) {
-void sub(object ar, ...) {
+void op_sub(object ar, ...) {
   va_list args;
   va_start(args, ar);
   byte a1 = *(byte *)ar;
@@ -76,7 +76,7 @@ void sub(object ar, ...) {
 
 // and, andi
 // void and(byte a1, byte a2, bool immediate) {
-void and (object ar, ...) {
+void op_and(object ar, ...) {
   va_list args;
   va_start(args, ar);
   byte a1 = *(byte *)ar;
@@ -103,7 +103,7 @@ void and (object ar, ...) {
 
 // org, ori
 // void or(byte a1, byte a2, bool immediate) {
-void or (object ar, ...) {
+void op_or(object ar, ...) {
   va_list args;
   va_start(args, ar);
   byte a1 = *(byte *)ar;
@@ -130,7 +130,7 @@ void or (object ar, ...) {
 
 // xor
 // void eor(byte a1, byte a2, bool immediate) {
-void eor(object ar, ...) {
+void op_eor(object ar, ...) {
   va_list args;
   va_start(args, ar);
   byte a1 = *(byte *)ar;
@@ -157,7 +157,7 @@ void eor(object ar, ...) {
 
 // one's complement
 // void com(byte a, bool full) {
-void com(object ar, ...) {
+void op_com(object ar, ...) {
   va_list args;
   va_start(args, ar);
   byte a1 = *(byte *)ar;
@@ -183,7 +183,7 @@ void com(object ar, ...) {
 
 // two's complement
 // void neg(byte a, bool full) {
-void neg(object ar, ...) {
+void op_neg(object ar, ...) {
   va_list args;
   va_start(args, ar);
   byte a1 = *(byte *)ar;
@@ -209,7 +209,7 @@ void neg(object ar, ...) {
 
 // set bit(s) in register
 // void sbr(byte a1, ushort a2, bool full) {
-void sbr(object ar, ...) {
+void op_sbr(object ar, ...) {
   va_list args;
   va_start(args, ar);
   byte a1 = *(byte *)ar;
@@ -235,7 +235,7 @@ void sbr(object ar, ...) {
 
 // clear bit(s) in register
 // void cbr(byte a1, ushort a2, bool full) {
-void cbr(object ar, ...) {
+void op_cbr(object ar, ...) {
   va_list args;
   va_start(args, ar);
   byte a1 = *(byte *)ar;
@@ -261,7 +261,7 @@ void cbr(object ar, ...) {
 
 // increment register
 // void inc(byte a, bool full) {
-void inc(object ar, ...) {
+void op_inc(object ar, ...) {
   va_list args;
   va_start(args, ar);
   byte a1 = *(byte *)ar;
@@ -287,7 +287,7 @@ void inc(object ar, ...) {
 
 // decrement register
 // void dec(byte a, bool full) {
-void dec(object ar, ...) {
+void op_dec(object ar, ...) {
   va_list args;
   va_start(args, ar);
   byte a1 = *(byte *)ar;
@@ -315,7 +315,7 @@ void dec(object ar, ...) {
 
 // clear register
 // void clr(byte a, bool full) {
-void clr(object ar, ...) {
+void op_clr(object ar, ...) {
   va_list args;
   va_start(args, ar);
   byte a1 = *(byte *)ar;
@@ -341,7 +341,7 @@ void clr(object ar, ...) {
 
 // set register to FF
 // void ser(byte a, bool full) {
-void ser(object ar, ...) {
+void op_ser(object ar, ...) {
   va_list args;
   va_start(args, ar);
   byte a1 = *(byte *)ar;
@@ -363,7 +363,7 @@ void ser(object ar, ...) {
 
 // multiply (registers) unsigned ?? see doc
 // void mul(byte a1, byte a2, bool full) {
-void mul(object ar, ...) {
+void op_mul(object ar, ...) {
   va_list args;
   va_start(args, ar);
   byte a1 = *(byte *)ar;
@@ -391,7 +391,7 @@ void mul(object ar, ...) {
 }
 
 // read in all or part of register
-ushort reads(byte a) {
+ushort op_reads(byte a) {
   if (a < REGSIZE) {
     reg *r = getReg(a);
     ushort ret;
@@ -400,7 +400,7 @@ ushort reads(byte a) {
   }
 }
 
-byte readb(byte a, bool first) {
+byte op_readb(byte a, bool first) {
   if (a < REGSIZE) {
     reg *r = getReg(a);
     byte ret;

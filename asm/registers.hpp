@@ -1,6 +1,6 @@
 #ifndef _REGISTERS_H
 #define _REGISTERS_H
-#include "asm_types.h"
+#include "asm_types.hpp"
 
 #define REGSIZE 32
 

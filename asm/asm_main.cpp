@@ -1,22 +1,19 @@
-#include "registers.h"
+#include <algorithm>
+#include "registers.hpp"
 #include <iostream>
 #include <string>
-//#include "memory.h"
-#include "fmap.h"
-#include "op.h"
+#include "fmap.hpp"
+#include "op.hpp"
 #include "stdio.h"
-#include "util.h"
+#include "util.hpp"
 #include <boost/xpressive/xpressive.hpp>
 #include <map>
 
 using namespace std;
 using namespace boost::xpressive;
 
-int main(int argv[]) {
+int main(int argc, char** argv) {
   initFuncMap();
-
-  bool FALSE = false;
-  bool TRUE = true;
 
   cout << "Welcome to iASM \n"
        << "Console Mode\n";
@@ -32,7 +29,8 @@ int main(int argv[]) {
     getline(cin, cmd);
     if (regex_match(cmd, what, rex)) {
       string command = what[1].str();
-      transform(command.begin(), command.end(), command.begin(), toupper);
+      transform(command.begin(), command.end(), command.begin(),
+                [](unsigned char c) -> unsigned char { return toupper(c); });
       cout << "Size " << what.size() << '\n';
       cout << "Whole " << what[0] << '\n'; // whole match
       cout << "1 " << what[1] << '\n';     // first capture
@@ -45,7 +43,7 @@ int main(int argv[]) {
       /*if(command[command.length() + p - 1] == 'C') {
               p--;
               carry = true;
-      }/**/
+      }*/
       if (command[command.length() + p - 1] == 'I') {
         p--;
         immediate = true;
